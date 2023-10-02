@@ -1,0 +1,25 @@
+<h1>Mondai Toku Game</h1>
+
+<%= form_with(url: "/login/sign_in") do |f|%>
+  <%= f.label :id%>
+  <%= f.text_field :name %>
+
+  <br><br>
+
+  <%= f.label :password%>
+  <%= f.password_field :password%>
+
+  <br><br>
+  <%= f.submit "ログイン" %>
+
+<% end %>
+
+  <br><br>
+
+<%= link_to "ユーザー作成", new_user_path %>
+
+<% if flash[:success] %>
+  <div class="alert alert-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
