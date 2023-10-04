@@ -1,4 +1,4 @@
-class QueController < ApplicationController
+class QuesController < ApplicationController
   before_action :que_params, only: [:create]
   def index
     @que = Que.all
@@ -11,8 +11,8 @@ class QueController < ApplicationController
   def create
     @que = Que.new(que_params)
 
-    if @user.save
-    redirect_to '/post/index'
+    if @que.save
+      redirect_to '/ques/index'
     else
       render :new
     end
@@ -25,6 +25,10 @@ class QueController < ApplicationController
   end
 
   def destroy
+  end
+
+  def detail
+    @que = Que.find(params[:que_id])
   end
   private
   def que_params

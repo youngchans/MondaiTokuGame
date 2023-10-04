@@ -1,9 +1,0 @@
-<div class ="Que_T">問題管理</div>
-<div class="container">
-  <%= button_to "問題を新規作成", '/que/new', method: :get, class: "B_R"%>
-</div>
-
-<% @que.each do |p|%>
-  問題 : <%= p.question %><br>
-  <hr />
-<% end %>

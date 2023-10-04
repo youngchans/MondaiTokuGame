@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
-  get 'que/index'
-  get 'que/edit'
-  get 'que/update'
-  get 'que/destroy'
+  get 'ques/index'
+  get 'ques/edit/:post_id' => 'ques#edit'
+  get 'ques/update'
+  get 'ques/destroy'
+  get 'ques/main'
 
-  get 'ques/ques_p'
   get 'start/start_p'
 
   get 'ranking/rank_p'
   get 'mains/main'
 
   resources :users
-  resources :que
+  resources :ques
+
   get 'logins/login'
 
   post 'login/sign_in', to: 'logins#create'
