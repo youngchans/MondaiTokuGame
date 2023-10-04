@@ -1,6 +1,3 @@
 <div class ="Main_T">ランダムクイズ</div>
 
-<%= form_with model: @random_quest, url: quests_path do |f| %>
-  <%= f.label :question, "문제" %>
-  <%= f.text :question, value: @random_quest.question %>
-<% end %>
+<%= render @random_quest %>
