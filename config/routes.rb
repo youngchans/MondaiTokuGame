@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'searches/result'
   resources :quests
   get 'start/start_p'
   get 'ranking/rank_p'

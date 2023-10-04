@@ -1,14 +1,14 @@
 <p style="color: green"><%= notice %></p>
 <div class ="Main_T">問題管理</div>
+<div class="container">
+  <%= button_to "新規作成", new_quest_path, method: :get,class: "B_M"%>
+  <%= button_to "メインメニューへ", mains_main_path, method: :get,class: "B_M"%>
+</div>
+<%= render 'searches/search_form', post: @quests.klass %>
+
 <div id="quests" >
   <% @quests.each do |quest| %>
       <%= quest.question %>
     <%= button_to "修正", quest, method: :get%>
   <% end %>
-</div>
-<div class="container">
-  <%= button_to "新規作成", new_quest_path, method: :get,class: "B_M"%>
-</div>
-<div class="container">
-  <%= button_to "メインメニューへ", mains_main_path, method: :get,class: "B_M"%>
 </div>

@@ -1,9 +1,13 @@
 class QuestsController < ApplicationController
-  before_action :set_quest, only: %i[ show edit update destroy ]
+  before_action :set_quest, only: %i[ show edit update destroy search]
 
   # GET /quests or /quests.json
   def index
-    @quests = Quest.all
+    if params[:search].present?
+      @quests = Quest.where("question LIKE ?", "%#{params[:search]}%")
+    else
+      @quests = Quest.all
+    end
   end
 
   # GET /quests/1 or /quests/1.json
