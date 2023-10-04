@@ -24,7 +24,6 @@
     right: 10px;
 }
 .container {
-
     font-size: 24px;
     margin: 40px;
     width: 100%;
@@ -42,13 +41,13 @@
     align-items: center;
     padding: 5px;
 }
-.Que_T{
-    font-size: 32px;
-    text-align: center;
+.M_m{
+    font-size: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
+    margin: 50px;
 }
 .container .B_R {
     background-color: whitesmoke;
@@ -74,6 +73,15 @@
     margin-top: 150px;
 
 }
+.M_k {
+    background-color: whitesmoke;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
 
 .B_R:hover {
     background-color: deepskyblue;
@@ -82,6 +90,9 @@
     background-color: deepskyblue;
 }
 .B_S:hover {
+    background-color: deepskyblue;
+}
+.B_k:hover {
     background-color: deepskyblue;
 }
 

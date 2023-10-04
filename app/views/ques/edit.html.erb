@@ -1,7 +1,0 @@
-<h1>수정 화면</h1>
-<form action="/post/update/<%= @que.id %>/" method="post">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  제목 : <input type="text" name="post_title" value="<%= @que %>"><br />
-  내용 : <textarea name="post_content" rows="8" cols="80"><%= @que %></textarea><br />
-  <input type="submit" value="제출">
-</form>

@@ -1,2 +1,0 @@
-class Que < ApplicationRecord
-end

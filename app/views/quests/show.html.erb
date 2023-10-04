@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+<div class ="Main_T">詳細画面</div>
+<%= render @quest %>
+
+<div>
+  <%= button_to "修正", edit_quest_path(@quest),method: :get %>
+  <%= button_to "削除", @quest, method: :delete %>
+  <%= button_to "戻る", quests_path,method: :get %>
+</div>

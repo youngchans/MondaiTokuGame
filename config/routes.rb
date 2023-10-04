@@ -1,17 +1,9 @@
 Rails.application.routes.draw do
-  get 'ques/index'
-  get 'ques/edit/:post_id' => 'ques#edit'
-  get 'ques/update'
-  get 'ques/destroy'
-  get 'ques/main'
-
+  resources :quests
   get 'start/start_p'
-
   get 'ranking/rank_p'
   get 'mains/main'
-
   resources :users
-  resources :ques
 
   get 'logins/login'
 
