@@ -1,0 +1,2 @@
+module QueHelper
+end
