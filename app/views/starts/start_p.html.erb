@@ -1,0 +1,91 @@
+<div class="Main_T">ランダムクイズ</div>
+
+<div id="quiz-container">
+  <% if @random_quest %>
+    <h2>問題 <%= @answers + 1 %> : <%= @random_quest.question %></h2>
+    <br>
+    <form id="quiz-form">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+      <!-- 라디오 버튼을 루프로 생성 -->
+      <% options = [@random_quest.description, @random_quest.wrong_f, @random_quest.wrong_s].shuffle %>
+      <% options.each_with_index do |option, index| %>
+        <label>
+          <%= radio_button_tag('selected_option', option, false, disabled: false) %>
+          <%= option %>
+        </label>
+        <br>
+      <% end %>
+
+      <!-- "提出" 버튼 -->
+      <button type="button" id="submit-button">提出</button>
+    </form>
+  <% end %>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#submit-button').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '<%= submit_answer_start_path %>',
+                data: $('#quiz-form').serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.correct) {
+                        alert('정답입니다!');
+                    } else {
+                        alert('틀렸습니다.');
+                    }
+
+                    if (response.finished) {
+                        var correctRate = response.correctRate;
+                        alert('퀴즈가 종료되었습니다. 정확도: ' + correctRate + '%');
+                        window.location.href = '<%= mains_main_path %>';
+                    } else {
+                        generateRandomQuest(response); // 수정된 부분: 응답을 전달
+                    }
+                },
+                error: function() {
+                    alert('오류가 발생했습니다.');
+                }
+            });
+        });
+
+        function generateRandomQuest(response) { // 수정된 부분: 응답을 파라미터로 받음
+            $.ajax({
+                type: 'GET',
+                url: '<%= submit_answer_start_path %>',
+                dataType: 'json',
+                success: function(response) {
+                    $('#quiz-form h2').text('問題 ' + (response.answers + 1) + ': ' + response.random_quest.question);
+                    var options = [response.random_quest.description, response.random_quest.wrong_f, response.random_quest.wrong_s];
+                    options = shuffleArray(options);
+                    var labels = $('#quiz-form label');
+                    labels.each(function(index) {
+                        $(this).find('input[type="radio"]').val(options[index]);
+                        $(this).find('label').text(options[index]);
+                    });
+                },
+                error: function() {
+                    alert('오류가 발생했습니다.');
+                }
+            });
+        }
+
+        // 배열 랜덤 순서로 섞기
+        function shuffleArray(array) {
+            var currentIndex = array.length, randomIndex, tempValue;
+
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+
+                tempValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = tempValue;
+            }
+
+            return array;
+        }
+    });
+</script>

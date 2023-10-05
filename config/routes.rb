@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
-  get 'searches/result'
+  resources :users
   resources :quests
-  get 'start/start_p'
+
+  get 'searches/result'
+  get 'starts/start_p'
   get 'ranking/rank_p'
   get 'mains/main'
-  resources :users
-
   get 'logins/login'
 
-  post 'login/sign_in', to: 'logins#create'
+  post 'logins/sign_in', to: 'logins#create' # 수정된 라우팅 이름
+
+  # 수정된 라우팅 이름 및 경로
+  post 'starts/submit_answer', to: 'starts#submit_answer', as: 'submit_answer_start'
+
   root 'logins#login'
 
-  delete 'main/sign_out', to: 'mains#destroy'
+  delete 'mains/sign_out', to: 'mains#destroy' # 수정된 라우팅 이름
 end

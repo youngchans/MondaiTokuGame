@@ -16,7 +16,7 @@
 
   <br><br>
 
-<%= link_to "ユーザー作成", new_user_path %>
+<%= button_to "ユーザー作成", new_user_path,method: :get %>
 
 <% if flash[:success] %>
   <div class="alert alert-success">

@@ -1,4 +1,3 @@
-
 <div class ="Main_T">メインメニュー</div>
 <% if flash[:success] %>
   <div class="alert alert-success">
@@ -11,6 +10,6 @@
 <% end %>
 <div class="container">
   <%= button_to "問題管理", quests_path, method: :get, class: "B_M"%>
-  <%= button_to "スタート", start_start_p_path, method: :get, class: "B_S"%>
+  <%= button_to "スタート", starts_start_p_path, method: :get, class: "B_S"%>
   <%= button_to "ランキング", ranking_rank_p_path, method: :get, class: "B_R"%>
   </div>
