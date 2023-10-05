@@ -3,18 +3,13 @@
 <%= form_with(url: "/login/sign_in") do |f|%>
   <%= f.label :id%>
   <%= f.text_field :name %>
-
   <br><br>
-
   <%= f.label :password%>
   <%= f.password_field :password%>
-
   <br><br>
   <%= f.submit "ログイン" %>
-
 <% end %>
-
-  <br><br>
+  <br>
 
 <%= button_to "ユーザー作成", new_user_path,method: :get %>
 

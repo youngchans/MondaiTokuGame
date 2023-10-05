@@ -7,8 +7,7 @@ class LoginsController < ApplicationController
       user = User.find_by(name: params[:name])
       if user.present? && user.authenticate(params[:password])
         flash[:notice] = "ログイン成功しました。"
-        cookies[:name] = user.name
-        cookies[:password] = user.password_digest
+        session[:name] = user.id
         redirect_to '/mains/main'
       else
         flash[:notice] = "間違っているIDかパスワードです。もう一度確認してください。"
