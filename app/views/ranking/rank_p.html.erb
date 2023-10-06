@@ -1,2 +1,22 @@
-<h1>Ranking#rank_p</h1>
-<p>Find me in app/views/ranking/rank_p.html.erb</p>
+<div class ="Main_T">ランキング</div>
+<div class="rank" style="text-align: center;">
+  <table>
+    <thead>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>正解率</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @top_users.each_with_index do |user, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= user.name %></td>
+        <td><%= user.highest_rate %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<%= button_to "メインメニューへ", mains_main_path, method: :get,class: "R_B"%>

@@ -95,4 +95,15 @@
 .B_k:hover {
     background-color: deepskyblue;
 }
+.rank{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 50vh;
+     margin: 0;
+ }
+.R_B {
+    float: right; /* 오른쪽으로 부동시킵니다. */
+    margin-right: 20px; /* 오른쪽 여백을 조절합니다. */
+}
 
