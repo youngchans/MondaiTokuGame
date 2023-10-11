@@ -5,7 +5,7 @@
   </div>
 <% end %>
 <% if cookies[:name].present? && cookies[:password].present? %>
-  <%= button_to "パスワード変更", change_p_mains_path,method: :get %>
+  <%= button_to "パスワード変更", mains_change_p_path,method: :get, class: "change_p"%>
   <%= button_to "ログアウト", main_sign_out_path, method: :delete, class: "logout"%>
 <% end %>
 <div class="container">

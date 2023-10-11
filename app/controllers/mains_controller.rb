@@ -12,6 +12,6 @@ class MainsController < ApplicationController
     end
   end
   def change_p
-    redirect_to logins_login_path
+    @user = User.find(session[:name])
   end
 end

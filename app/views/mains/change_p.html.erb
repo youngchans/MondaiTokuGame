@@ -1,10 +1,10 @@
 <div class ="Main_T">パスワード変更</div>
-
-<%= form_with model: @user do |f|%>
-  <%= f.label :Id %>
-  <%= f.text_field :name %>
+<br><br>
+<div style="text-align: center;">
+  <%= form_with model: @user do |f|%>
+    <%= f.label @login_user%>
   <br><br>
-  <%= f.label :password %>
+  <%= f.label :password変更 %>
   <%= f.password_field :password %>
   <br><br>
   <%= f.label :password確認 %>
@@ -12,3 +12,4 @@
   <br><br>
   <%= f.submit "ユーザー作成"%>
 <% end %>
+</div>
