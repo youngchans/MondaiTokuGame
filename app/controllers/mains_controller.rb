@@ -12,6 +12,21 @@ class MainsController < ApplicationController
     end
   end
   def change_p
-    @user = User.find(session[:name])
+    @user= User.find(cookies[:name])
   end
+  def update
+    @user = User.find(cookies[:name])
+    @user.password = params[:password]
+    if params[:password] == params[:password_confirmation]
+      @user.save
+      flash[:change_success] = "パスワード変更を成功しました。"
+      cookies.delete :name
+      cookies.delete :password
+      redirect_to root_path
+    else
+      flash[:fail] = "パスワード変更を失敗しました。（パスワードが違います）"
+      redirect_to mains_change_p_path
+    end
+  end
+
 end

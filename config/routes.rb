@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'mains/change_p'
 
   post 'login/sign_in', to: 'logins#create'
-  post 'change_p/sign_in', to: 'logins#create'
+  post 'change_p/update', to: 'mains#update'
   post 'start/submit_answer', to: 'starts#submit_answer', as: 'submit_answer_start'
 
   root 'logins#login'

@@ -1,15 +1,20 @@
 <div class ="Main_T">パスワード変更</div>
 <br><br>
 <div style="text-align: center;">
-  <%= form_with model: @user do |f|%>
-    <%= f.label @login_user%>
+  <%= form_with(url: "/change_p/update")do |f|%>
+    <%= f.label @user.name %>
   <br><br>
   <%= f.label :password変更 %>
-  <%= f.password_field :password %>
+  <%= f.password_field :password%>
   <br><br>
   <%= f.label :password確認 %>
   <%= f.password_field :password_confirmation %>
   <br><br>
-  <%= f.submit "ユーザー作成"%>
+  <%= f.submit "パスワード変更" ,method: :post %>
 <% end %>
 </div>
+<% if flash[:fail] %>
+  <div class="alert alert-success">
+    <%= flash[:fail] %>
+  </div>
+<% end %>
