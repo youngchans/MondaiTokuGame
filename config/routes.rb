@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'ranking/rank_p'
   get 'mains/main'
   get 'logins/login'
-
+  get 'mains/change_p'
   post 'login/sign_in', to: 'logins#create'
   post 'start/submit_answer', to: 'starts#submit_answer', as: 'submit_answer_start'
 

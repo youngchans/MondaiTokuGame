@@ -10,8 +10,7 @@
   <%= f.submit "ログイン" %>
 <% end %>
   <br>
-
-<%= button_to "ユーザー作成", new_user_path,method: :get %>
+  <%= button_to "ユーザー作成", new_user_path,method: :get %>
 </div>
 <% if flash[:success] %>
   <div class="alert alert-success">
