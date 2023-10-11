@@ -24,7 +24,7 @@ class QuestsController < ApplicationController
 
     respond_to do |format|
       if @quest.save
-        format.html { redirect_to quest_url(@quest), notice: "Quest was successfully created." }
+        format.html { redirect_to quest_url(@quest), notice: "単語作成を成功しました。" }
         format.json { render :show, status: :created, location: @quest }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,7 +36,7 @@ class QuestsController < ApplicationController
   def update
     respond_to do |format|
       if @quest.update(quest_params)
-        format.html { redirect_to quest_url(@quest), notice: "Quest was successfully updated." }
+        format.html { redirect_to quest_url(@quest), notice: "単語アップデートを成功しました。" }
         format.json { render :show, status: :ok, location: @quest }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,7 +50,7 @@ class QuestsController < ApplicationController
     @quest.destroy
 
     respond_to do |format|
-      format.html { redirect_to quests_url, notice: "Quest was successfully destroyed." }
+      format.html { redirect_to quests_url, notice: "単語削除を成功しました。" }
       format.json { head :no_content }
     end
   end

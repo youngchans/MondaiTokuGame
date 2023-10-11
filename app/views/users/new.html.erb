@@ -1,5 +1,5 @@
-<h2>ユーザー作成ページ</h2>
-
+<div style="text-align: center;">
+  <h2>ユーザー作成ページ</h2>
 <%= form_with model: @user do |f|%>
   <%= f.label :Id %>
   <%= f.text_field :name %>
@@ -12,7 +12,7 @@
   <br><br>
   <%= f.submit "ユーザー作成"%>
 <% end %>
-
+</div>
 <% if flash[:fail] %>
   <div class="alert alert-success">
     <%= flash[:fail] %>

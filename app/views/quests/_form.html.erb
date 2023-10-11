@@ -1,3 +1,4 @@
+<div style="text-align: center;">
 <%= form_with(model: quest) do |form| %>
   <% if quest.errors.any? %>
     <div style="color: red">
@@ -10,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-
+    </div>
   <div>
     <%= form.label :問題, style: "display: block" %>
     <%= form.text_field :question %>
