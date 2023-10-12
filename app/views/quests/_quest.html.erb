@@ -7,7 +7,6 @@
     <strong>正解:</strong>
     <%= quest.description %>
   </p>
-  <h3>類似語</h3>
   <div id="tasks">
     <% quest.tasks.each do |task| %>
       <%= render partial: "tasks/quest_task", locals: { task: task } %>

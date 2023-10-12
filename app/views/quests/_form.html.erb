@@ -6,7 +6,6 @@
       <%= f.input :question, label: "単語" %>
       <%= f.input :description, label:"正解" %>
     </div>
-    <h3>類似語</h3>
     <div id="tasks">
       <%= f.simple_fields_for :tasks do |task| %>
         <%= render "task_fields", f: task %>
