@@ -1,6 +1,5 @@
 <div class="Main_T">ランダムクイズ</div>
 <div style="text-align: center;">
-<h3>正解数:<%= session[:correct]%></h3>
 <%= button_to "辞める", mains_main_path, method: :get,class: "R_B"%>
 <h2>問題 <%= session[:answers] +1%> : <%= @random_quest.question %></h2>
 
