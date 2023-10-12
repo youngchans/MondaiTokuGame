@@ -53,11 +53,6 @@ class QuestsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def search
-    query = params[:query]
-    @quests = Quest.where("question LIKE ?", "%#{query}%")
-    render partial: 'search_results'
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -6,8 +6,8 @@
   <%= button_to "メインメニューへ", mains_main_path, method: :get, class: "B_M" %>
   </div>
   <form id="search-form">
-    <input type="text" id="search-input" placeholder="검색어 입력">
-    <input type="button" id="search-button" value="검색">
+    <input type="text" id="search-input" placeholder="単語入力">
+    <input type="button" id="search-button" value="検索">
   </form>
   <% @quests.each do |quest| %>
     <p>単語：<%= quest.question %></p>
@@ -28,7 +28,7 @@
                     $('#quests').html(data);
                 },
                 error: function() {
-                    console.log('검색 결과를 가져오는 중 오류 발생');
+                    console.log('エラーが発生しました。');
                 }
             });
         });

@@ -1,5 +1,0 @@
-<% @quests.each do |quest| %>
-  <p>単語：<%= quest.question %></p>
-  <p>正解：<%= quest.description %></p>
-  <%= button_to "修正", quest, method: :get %>
-<% end %>
