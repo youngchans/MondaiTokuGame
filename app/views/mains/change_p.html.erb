@@ -1,9 +1,10 @@
 <div class ="Main_T">パスワード変更</div>
-<br><br>
+<br>
+<%= button_to "辞める", mains_main_path, method: :get,class: "R_B"%>
+<br>
 <div style="text-align: center;">
   <%= form_with(url: "/change_p/update")do |f|%>
-    <%= f.label @user.name %>
-  <br><br>
+    <p>ID : <%= f.label @user.name %></p>
   <%= f.label :password変更 %>
   <%= f.password_field :password%>
   <br><br>

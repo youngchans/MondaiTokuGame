@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users
   resources :quests
+  get 'quests/index', to: 'quests#search'
 
   get 'searches/result'
   get 'starts/start_p'

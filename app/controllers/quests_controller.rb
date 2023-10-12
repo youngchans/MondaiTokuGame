@@ -1,5 +1,5 @@
 class QuestsController < ApplicationController
-  before_action :set_quest, only: %i[ show edit update destroy search]
+  before_action :set_quest, only: %i[ show edit update destroy]
 
   def index
     if params[:search].present?
@@ -45,7 +45,6 @@ class QuestsController < ApplicationController
     end
   end
 
-  # DELETE /quests/1 or /quests/1.json
   def destroy
     @quest.destroy
 
@@ -53,6 +52,11 @@ class QuestsController < ApplicationController
       format.html { redirect_to quests_url, notice: "単語削除を成功しました。" }
       format.json { head :no_content }
     end
+  end
+  def search
+    query = params[:query]
+    @quests = Quest.where("question LIKE ?", "%#{query}%")
+    render partial: 'search_results'
   end
 
   private

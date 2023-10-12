@@ -1,6 +1,0 @@
-<%= form_tag(searches_result_path, method: "get") do %>
-  <%= label_tag(:div, "単語 :") %>
-  <%= text_field_tag(:search_text) %>
-  <%= hidden_field_tag(:bulletin, "#{post}") %>
-  <%= submit_tag("検索") %>
-<% end %>

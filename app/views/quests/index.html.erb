@@ -1,14 +1,43 @@
 <p style="color: green"><%= notice %></p>
-<div class ="Main_T">単語管理</div>
-<div class="container">
-  <%= button_to "新規作成", new_quest_path, method: :get,class: "B_M"%>
-  <%= button_to "メインメニューへ", mains_main_path, method: :get,class: "B_M"%>
-</div>
-
 <div id="quests" style="text-align: center;">
-  <%= render 'searches/search_form', post: @quests.klass %>
+  <div class ="Main_T">単語管理</div>
+  <div class ="container">
+  <%= button_to "新規作成", new_quest_path, method: :get, class: "B_M" %>
+  <%= button_to "メインメニューへ", mains_main_path, method: :get, class: "B_M" %>
+  </div>
+  <form id="search-form">
+    <input type="text" id="search-input" placeholder="검색어 입력">
+    <input type="button" id="search-button" value="검색">
+  </form>
   <% @quests.each do |quest| %>
-      <%= quest.question %>
-    <%= button_to "修正", quest, method: :get%>
+    <p>単語：<%= quest.question %></p>
+    <p>正解：<%= quest.description %></p>
+    <%= button_to "修正", quest, method: :get %>
   <% end %>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#search-button').on('click', function() {
+            var query = $('#search-input').val();
+
+            $.ajax({
+                url: '/quests',
+                method: 'GET',
+                data: { search: query },
+                success: function(data) {
+                    $('#quests').html(data);
+                },
+                error: function() {
+                    console.log('검색 결과를 가져오는 중 오류 발생');
+                }
+            });
+        });
+
+        // Enter 키를 눌렀을 때 검색 실행
+        $('#search-input').on('keyup', function(event) {
+            if (event.key === 'Enter') {
+                $('#search-button').click();
+            }
+        });
+    });
+</script>
