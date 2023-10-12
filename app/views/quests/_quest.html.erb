@@ -3,20 +3,14 @@
     <strong>問題:</strong>
     <%= quest.question %>
   </p>
-
   <p>
     <strong>正解:</strong>
     <%= quest.description %>
   </p>
-
-  <p>
-    <strong>誤答1:</strong>
-    <%= quest.wrong_f %>
-  </p>
-
-  <p>
-    <strong>誤答2:</strong>
-    <%= quest.wrong_s %>
-  </p>
-
+  <h3>類似語</h3>
+  <div id="tasks">
+    <% quest.tasks.each do |task| %>
+      <%= render partial: "tasks/quest_task", locals: { task: task } %>
+    <% end %>
+  </div>
 </div>

@@ -46,6 +46,7 @@
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.4.19, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.39.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cocoon (v1.2.15, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.2.2, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.8.0, Remote-rbenv: ruby-3.2.2 (-p53) [gem]" level="application" />
@@ -111,6 +112,7 @@
         <option value="application_record" />
         <option value="benchmark" />
         <option value="channel" />
+        <option value="cocoon:install" />
         <option value="controller" />
         <option value="generator" />
         <option value="helper" />
@@ -124,6 +126,7 @@
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="simple_form:install" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
@@ -140,6 +143,7 @@
         <option value="application_record" />
         <option value="benchmark" />
         <option value="channel" />
+        <option value="cocoon:install" />
         <option value="controller" />
         <option value="generator" />
         <option value="helper" />
@@ -153,6 +157,7 @@
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="simple_form:install" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />

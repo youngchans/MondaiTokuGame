@@ -10,10 +10,11 @@ class StartsController < ApplicationController
     end
     increment_answers
     if session[:answers] == 10
-      correct_rate = (session[:correct].to_f / session[:answers] * 100).to_i
-      user = User.find(session[:name])
-      user.update(highest_rate: correct_rate)
-      redirect_to mains_main_path
+      @correct_rate = (session[:correct].to_f / session[:answers] * 100).to_i
+      user = User.find(cookies[:name])
+      user.update(highest_rate: @correct_rate)
+      flash[:success] = "お疲れ様でした！#{session[:answers]}中#{session[:correct]}正解で正解率は#{(session[:correct].to_f / session[:answers] * 100).to_i}％です！"
+      redirect_to ranking_rank_p_path
     else
       generate_random_quest
       redirect_to :starts_start_p
@@ -54,5 +55,10 @@ class StartsController < ApplicationController
     end
     session[:used_id] << @random_id
     @random_quest = Quest.find_by(id: @random_id)
+    @quest_similar = Task.find_by(quest_id: @random_id)
+    similar_id = Task.pluck(:quest_id)
+    unique_available_ids = similar_id.to_a.difference([@random_id].flatten)
+    @rand_similar_id = unique_available_ids.sample
+    @random_similar = Task.find_by(quest_id: @rand_similar_id)
   end
 end

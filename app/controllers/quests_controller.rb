@@ -14,6 +14,7 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
+    @quest.tasks.build
   end
 
   def edit
@@ -62,6 +63,11 @@ class QuestsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quest_params
-      params.require(:quest).permit(:question, :description, :wrong_f, :wrong_s)
+      params.require(:quest).permit(:question, :description, tasks_attributes: %i[
+      id
+      similar_word
+      completed
+      _destroy
+      ])
     end
 end

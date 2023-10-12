@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :tasks
   resources :users
   resources :quests
-  get 'quests/index', to: 'quests#search'
 
+  get 'quests/index', to: 'quests#search'
   get 'searches/result'
   get 'starts/start_p'
   get 'ranking/rank_p'

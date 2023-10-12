@@ -1,4 +1,10 @@
 <div class ="Main_T">ランキング</div>
+<% if flash[:success] %>
+  <div class="alert alert-success" style="text-align: center;">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
 <div class="rank" style="text-align: center;">
   <table>
     <thead>

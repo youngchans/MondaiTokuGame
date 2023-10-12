@@ -82,6 +82,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    cocoon (1.2.15)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
@@ -176,6 +177,9 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_form (5.3.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -208,12 +212,14 @@ DEPENDENCIES
   bcrypt (~> 3.1.16)
   bootsnap
   capybara
+  cocoon
   debug
   jbuilder
   pg
   puma (~> 5.0)
   rails (~> 7.0.8)
   selenium-webdriver
+  simple_form
   sprockets-rails
   tzinfo-data
   web-console

@@ -1,38 +1,22 @@
 <div style="text-align: center;">
-<%= form_with(model: quest) do |form| %>
-  <% if quest.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(quest.errors.count, "error") %> prohibited this quest from being saved:</h2>
-
-      <ul>
-        <% quest.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= simple_form_for(@quest) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="form-inputs">
+      <%= f.input :question , content:"単語"%>
+      <%= f.input :description, content:"正解" %>
+    </div>
+    <h3>類似語</h3>
+    <div id="tasks">
+      <%= f.simple_fields_for :tasks do |task| %>
+        <%= render "task_fields", f: task %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "類似語追加", f, :tasks %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, content:"単語作成" %>
     </div>
   <% end %>
-    </div>
-  <div>
-    <%= form.label :問題, style: "display: block" %>
-    <%= form.text_field :question %>
-  </div>
-
-  <div>
-    <%= form.label :正解, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div>
-    <%= form.label :誤答1, style: "display: block" %>
-    <%= form.text_field :wrong_f %>
-  </div>
-
-  <div>
-    <%= form.label :誤答2, style: "display: block" %>
-    <%= form.text_field :wrong_s %>
-  </div>
-
-  <div>
-    <%= form.submit "作成" %>
-  </div>
-<% end %>
+</div>
