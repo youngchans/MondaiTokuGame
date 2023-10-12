@@ -3,8 +3,8 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <div class="form-inputs">
-      <%= f.input :question , content:"単語"%>
-      <%= f.input :description, content:"正解" %>
+      <%= f.input :question, label: "単語" %>
+      <%= f.input :description, label:"正解" %>
     </div>
     <h3>類似語</h3>
     <div id="tasks">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="form-actions">
-      <%= f.button :submit, content:"単語作成" %>
+      <%= f.button :submit, label: "제출하기" %>
     </div>
   <% end %>
 </div>
