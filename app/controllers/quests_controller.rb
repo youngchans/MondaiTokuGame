@@ -14,7 +14,7 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
-    @quest.tasks.build
+    3.times {@quest.tasks.build}
   end
 
   def edit
@@ -61,7 +61,6 @@ class QuestsController < ApplicationController
       @quest = Quest.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def quest_params
       params.require(:quest).permit(:question, :description, tasks_attributes: %i[
       id

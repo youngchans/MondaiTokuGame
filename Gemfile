@@ -33,6 +33,7 @@ gem 'bootsnap'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'cocoon'
 gem 'simple_form'
+gem 'jquery-rails'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
