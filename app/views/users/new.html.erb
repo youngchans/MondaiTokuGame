@@ -1,5 +1,7 @@
 <div style="text-align: center;">
   <h2>ユーザー作成ページ</h2>
+  <%= button_to "辞める", root_path, method: :get,class: "R_B"%>
+  <br>
 <%= form_with model: @user do |f|%>
   <%= f.label :Id %>
   <%= f.text_field :name %>
@@ -9,6 +11,10 @@
   <br><br>
   <%= f.label :password確認 %>
   <%= f.password_field :password_confirmation %>
+    <br><br>
+    <%= f.label :生年月日 %>
+    <%= f.date_field :birth_date %>
+    <p>（パスワードを探す時に使われます。）</p>
   <br><br>
   <%= f.submit "ユーザー作成"%>
 <% end %>

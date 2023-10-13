@@ -1,0 +1,15 @@
+<h1 style="text-align: center;">ID確認</h1>
+<div class="login" style="text-align: center;">
+  <p>IDを入力してください。</p>
+  <%= form_with(url: "/find/search") do |f|%>
+    <%= f.label :id%>
+    <%= f.text_field :name %>
+    <br><br>
+    <%= f.submit "提出" ,method: :post%>
+  <% end %>
+</div>
+<% if flash[:fail] %>
+  <div class="alert alert-success">
+    <%= flash[:fail] %>
+  </div>
+<% end %>

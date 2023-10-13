@@ -1,6 +1,11 @@
 <div class ="Main_T">パスワード変更</div>
 <br>
-<%= button_to "辞める", mains_main_path, method: :get,class: "R_B"%>
+<% if cookies[:name].present? && cookies[:password].present? %>
+  <%= button_to "辞める", mains_main_path, method: :get,class: "R_B"%>
+  <% else %>
+  <%= button_to "辞める", root_path, method: :get,class: "R_B"%>
+  <%end%>
+
 <br>
 <div style="text-align: center;">
   <%= form_with(url: "/change_p/update")do |f|%>

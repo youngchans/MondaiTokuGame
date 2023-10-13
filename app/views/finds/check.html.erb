@@ -1,0 +1,14 @@
+<h1 style="text-align: center;">本人確認</h1>
+<div class="login" style="text-align: center;">
+  <%= form_with(url: "/find/validate") do |f|%>
+    <%= f.label :生年月日 %>
+    <%= f.date_field :birth_date %>
+    <br><br>
+    <%= f.submit "提出", method: :post%>
+  <% end %>
+</div>
+<% if flash[:fail] %>
+  <div class="alert alert-success">
+    <%= flash[:fail] %>
+  </div>
+<% end %>

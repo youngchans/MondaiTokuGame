@@ -11,14 +11,12 @@
 <% end %>
   <br>
   <%= button_to "ユーザー作成", new_user_path, method: :get %>
+  <br>
+  <%= button_to "パスワードを忘れましたか？", '/finds/find', method: :get %>
 </div>
 <% if flash[:success] %>
   <div class="alert alert-success">
     <%= flash[:success] %>
   </div>
 <% end %>
-<% if flash[:change_success] %>
-  <div class="alert alert-success">
-    <%= flash[:change_success] %>
-  </div>
-<% end %>
+

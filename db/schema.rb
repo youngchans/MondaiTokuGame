@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_151147) do
     t.integer "highest_rate", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "birth_date"
   end
 
   add_foreign_key "tasks", "quests"
