@@ -47,7 +47,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy
 
@@ -65,6 +64,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:similar_word, :completed, :quests_id)
+      params.require(:task).permit(:similar_word, :completed, :quest_id)
     end
 end
