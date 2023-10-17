@@ -3,7 +3,13 @@
 
 <div style="text-align: center;">
   <%= render @quest %>
-  <%= button_to "修正", edit_quest_path(@quest),method: :get %>
+  <h2>類似語</h2>
+    <% @quest.tasks.each do |task| %>
+      <%= task.similar_word %>
+    <% end %>
+  <br>
+  <br>
+<%= button_to "修正", edit_quest_path(@quest),method: :get %>
   <%= button_to "削除", @quest, method: :delete %>
   <%= button_to "戻る", quests_path,method: :get %>
 </div>
