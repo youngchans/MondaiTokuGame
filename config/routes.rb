@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'quests/index', to: 'quests#search'
   get 'searches/result'
   get 'starts/start_p'
+  get 'starts/error'
   get 'ranking/rank_p'
   get 'mains/main'
   get 'logins/login'

@@ -1,7 +1,13 @@
 class StartsController < ApplicationController
   def start_p
-    generate_random_quest
-  end
+    task_pre = Task.all
+    similar_empty = task_pre.select { |task| task.similar_word.blank? }
+    if similar_empty.present?
+      redirect_to starts_error_path
+    else
+      generate_random_quest
+    end
+    end
 
   def submit_answer
     user_selected_option = params[:answer]

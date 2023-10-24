@@ -107,8 +107,12 @@
      min-height: 50vh;
      margin: 0;
  }
+
 .R_B {
-    float: right; /* 오른쪽으로 부동시킵니다. */
-    margin-right: 20px; /* 오른쪽 여백을 조절합니다. */
+    float: right;
+    margin-right: 20px;
+}
+.no-wrap {
+    white-space: nowrap;
 }
 

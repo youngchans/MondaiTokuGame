@@ -1,6 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: green;">
+  <%= notice %>
+</p>
 <div id="quests" style="text-align: center;">
   <div class ="Main_T">単語管理</div>
+  <hr>
   <div class ="container">
   <%= button_to "新規作成", new_quest_path, method: :get, class: "B_M" %>
   <%= button_to "メインメニューへ", mains_main_path, method: :get, class: "B_M" %>
@@ -10,8 +13,11 @@
     <input type="button" id="search-button" value="検索">
   </form>
   <% @quests.each do |quest| %>
-    <p>単語：<%= quest.question %></p>
-    <p>正解：<%= quest.description %></p>
+    <p>単語：<%= quest.question %> | 意味：<%= quest.description %></p>
+    類似語 :
+    <% quest.tasks.each do |task| %>
+      <%= raw task.similar_word %> |
+    <% end %>
     <%= button_to "詳細", quest, method: :get %>
   <% end %>
 </div>
@@ -32,8 +38,6 @@
                 }
             });
         });
-
-        // Enter 키를 눌렀을 때 검색 실행
         $('#search-input').on('keyup', function(event) {
             if (event.key === 'Enter') {
                 $('#search-button').click();

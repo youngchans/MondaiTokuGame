@@ -28,6 +28,7 @@ class QuestsController < ApplicationController
         format.html { redirect_to quest_url(@quest), notice: "単語作成を成功しました。" }
         format.json { render :show, status: :created, location: @quest }
       else
+        @quest.errors.add(:base, "単語は既に存在します。") if Quest.exists?(question: @quest.question)
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end

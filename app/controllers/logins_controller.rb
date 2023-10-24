@@ -9,7 +9,7 @@ class LoginsController < ApplicationController
         flash[:notice] = "ログイン成功しました。"
         cookies[:name] = user.id
         cookies[:password] = user.password_digest
-        redirect_to '/mains/main'
+        redirect_to mains_main_path
       else
         flash[:notice] = "間違っているIDかパスワードです。もう一度確認してください。"
         redirect_to logins_login_path

@@ -1,10 +1,11 @@
 <div style="text-align: center;">
   <%= simple_form_for(@quest) do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="alert alert-danger">
+      <%= f.object.errors[:base].to_sentence %>
+    </div>
     <div class="form-inputs">
       <%= f.input :question, label: "単語" %>
-      <%= f.input :description, label:"正解" %>
+      <%= f.input :description, label:"意味" %>
     </div>
     <div id="tasks">
       <%= f.simple_fields_for :tasks do |task| %>
