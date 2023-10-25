@@ -24,6 +24,10 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     respond_to do |format|
+      if @task.errors[:similar_word].include?("can't be blank")
+        @task.errors.delete(:similar_word)
+        @task.errors.add(:base, "類似語を入力してください.")
+      end
       if @task.save
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
