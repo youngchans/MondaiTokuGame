@@ -19,7 +19,7 @@ class MainsController < ApplicationController
     @user.password = params[:password]
     if params[:password] == params[:password_confirmation]
       @user.save
-      flash[:change_success] = "パスワード変更を成功しました。"
+      flash[:success] = "パスワード変更を成功しました。"
       cookies.delete :name
       cookies.delete :password
       redirect_to root_path

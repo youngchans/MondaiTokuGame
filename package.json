@@ -1,6 +1,11 @@
 {
   "dependencies": {
     "@nathanvda/cocoon": "^1.2.14",
-    "cocoon-js": "^0.0.5"
+    "@oddcamp/cocoon-vanilla-js": "^1.1.3",
+    "@rails/ujs": "^7.1.1",
+    "@rails/webpacker": "^5.4.4",
+    "cocoon-js": "^0.0.5",
+    "jquery": "^3.7.1",
+    "webpack": "^4.47.0"
   }
 }
