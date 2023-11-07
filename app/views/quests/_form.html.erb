@@ -11,7 +11,7 @@
       <%= f.simple_fields_for :tasks do |task| %>
         <%= render "task_fields", f: task %>
       <% end %>
-      <div class="links">
+      <div class="ingredients">
         <%= link_to_add_association "類似語追加", f, :tasks %>
       </div>
     </div>
