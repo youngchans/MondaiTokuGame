@@ -15,7 +15,7 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
-    3.times {@quest.tasks.build}
+    @quest.tasks.build
   end
 
   def edit
