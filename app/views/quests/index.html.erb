@@ -8,6 +8,7 @@
   <div class ="container">
   <%= button_to "新規作成", new_quest_path, method: :get, class: "B_M" %>
   <%= button_to "メインメニューへ", mains_main_path, method: :get, class: "B_M" %>
+    <%= button_to "csvダウンロードページ", download_csv_index_path, method: :get, class: "B_M" %>
   </div>
   <form id="search-form">
     <input type="text" id="search-input" placeholder="単語入力">

@@ -1,5 +1,5 @@
 class QuestsController < ApplicationController
-  before_action :set_quest, only: %i[ show edit update destroy]
+  before_action :set_quest, only: %i[ show edit update destroy download]
 
   def index
     if params[:search].present?
@@ -8,11 +8,11 @@ class QuestsController < ApplicationController
     else
       @quests = Quest.where(owner: cookies[:name])
     end
-  end
+
+    end
 
   def show
   end
-
   def new
     @quest = Quest.new
     @quest.tasks.build
