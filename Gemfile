@@ -34,6 +34,7 @@ gem 'bootsnap'
 gem 'cocoon'
 gem 'simple_form'
 gem 'jquery-rails'
+gem 'slim-rails'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
