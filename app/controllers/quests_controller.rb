@@ -17,6 +17,7 @@ class QuestsController < ApplicationController
   def new
     @quest = Quest.new
     @quest.tasks.build
+    @quest.tags.build
     @quests = Quest.where(owner: cookies[:name])
 
     respond_to do |format|
@@ -33,8 +34,10 @@ class QuestsController < ApplicationController
   def create
     @quest = Quest.new(quest_params)
     @quest.owner = cookies[:name]
+
     respond_to do |format|
       if @quest.save
+        save_tags
         format.html { redirect_to quest_url(@quest), notice: "単語作成を成功しました." }
         format.json { render :show, status: :created, location: @quest }
       else
@@ -99,6 +102,13 @@ class QuestsController < ApplicationController
     def set_quest
       @quest = Quest.find_by(id: params[:id])
     end
+  def save_tags
+    if params[:quest][:tag_ids].present?
+      params[:quest][:tag_ids].each do |tag_id|
+        QuestTag.create(quest_id: @quest.id, tag_id: tag_id)
+      end
+    end
+  end
 
   def send_quests_csv(quests)
     csv_data = CSV.generate do |csv|
@@ -122,10 +132,15 @@ class QuestsController < ApplicationController
 
     def quest_params
       params.require(:quest).permit(:question, :description, tasks_attributes: %i[
-      id
-      similar_word
-      completed
-      _destroy
-      ])
+                                                                        id
+                                                                        similar_word
+                                                                        completed
+                                                                        _destroy
+                                                                        ],
+                                                                    tags_attributes: %i[
+                                                                    id
+                                                                    tag
+                                                                    _destroy
+                                                                    ])
     end
-end
+  end

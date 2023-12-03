@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'searches/result'
 
   get 'starts/start_p'
+  get 'starts/select'
   get 'starts/error'
 
   get 'ranking/rank_p'

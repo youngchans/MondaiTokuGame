@@ -6,6 +6,7 @@
     <div class="form-inputs">
       <%= f.input :question, label: "単語" %>
       <%= f.input :description, label:"意味" %>
+      <%= f.collection_select(:tag_ids, Tag.all, :id, :tag, {}, { multiple: true }) %>
     </div>
     <div id="tasks">
       <%= f.simple_fields_for :tasks do |task| %>

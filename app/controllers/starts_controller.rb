@@ -1,8 +1,10 @@
 class StartsController < ApplicationController
   def start_p
+    session[:current_category] = params[:category] if params[:category]
+    @category = session[:current_category]
     task_pre = Task.all
     similar_empty = task_pre.select { |task| task.similar_word.blank? }
-    if similar_empty.present?
+    if similar_empty.present? || Quest.count <= 10
       redirect_to starts_error_path
     else
       generate_random_quest
@@ -15,7 +17,8 @@ class StartsController < ApplicationController
       increment_correct_answers
     end
     increment_answers
-    if session[:answers] == 10
+
+    if session[:answers] >= 10
       @correct_rate = (session[:correct].to_f / session[:answers] * 100).to_i
       user = User.find(cookies[:name])
       user.update(highest_rate: @correct_rate)
@@ -52,14 +55,18 @@ class StartsController < ApplicationController
 
 
   def generate_random_quest
-    available_ids = Quest.pluck(:id)
-    @random_id = available_ids.sample
-    if session[:used_id].include?(@random_id)
-      @random_id = available_ids.sample
+    if @category == "生物"
+      category_tag = Tag.find_by(tag: "生物")
+      tagged_quest_tags = QuestTag.where(tag_id: category_tag.id)
+      tagged_quest_ids = tagged_quest_tags.pluck(:quest_id)
+      available_ids = Quest.where(id: tagged_quest_ids)
     else
-      session[:used_id] << @random_id
+      category_tag = Tag.find_by(tag: "無生物")
+      tagged_quest_tags = QuestTag.where(tag_id: category_tag.id)
+      tagged_quest_ids = tagged_quest_tags.pluck(:quest_id)
+      available_ids = Quest.where(id: tagged_quest_ids)
     end
-    session[:used_id] << @random_id
+    @random_id = available_ids.sample
     @random_quest = Quest.find_by(id: @random_id)
     @quest_similar = Task.find_by(quest_id: @random_id)
     similar_id = Task.pluck(:quest_id)

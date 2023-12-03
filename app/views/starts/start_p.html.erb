@@ -1,47 +1,47 @@
 <div class="Main_T">ランダムクイズ</div>
 <hr>
 <div style="text-align: center;">
-<%= button_to "辞める", mains_main_path, method: :get,class: "R_B"%>
-<h2>問題 <%= session[:answers] +1%> :    <%= @random_quest.question %></h2>
+  <%= button_to "辞める", mains_main_path, method: :get,class: "R_B"%>
+  <h2><%= session[:category]%>問題 <%= session[:answers] +1%> :    <%= @random_quest.question %></h2>
 
-<%= form_tag(submit_answer_start_path, method: :post) do %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <div id="radio-container" style="border: 1px solid #000; padding: 15px; margin-left: 500px; margin-right: 500px;">
-  </div>
-  <%= submit_tag "提出" %>
+  <%= form_tag(submit_answer_start_path, method: :post) do %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div id="radio-container" style="border: 1px solid #000; padding: 15px; margin-left: 500px; margin-right: 500px;">
+    </div>
+    <%= submit_tag "提出" %>
   <%end %>
 </div>
-  <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          const radioContainer = document.getElementById("radio-container");
-          const radioOptions = [
-              { value: "description", label: "<%= @random_quest.description %>" },
-              { value: "similar_word", label: "<%= @quest_similar.similar_word %>" },
-              { value: "similar_word2", label: "<%= @random_similar.similar_word %>" }
-          ];
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const radioContainer = document.getElementById("radio-container");
+        const radioOptions = [
+            { value: "description", label: "<%= @random_quest.description %>" },
+            { value: "similar_word", label: "<%= @quest_similar.similar_word %>" },
+            { value: "similar_word2", label: "<%= @random_similar.similar_word %>" }
+        ];
 
 
-          shuffleArray(radioOptions);
+        shuffleArray(radioOptions);
 
 
-          radioOptions.forEach(option => {
-              const radioLabel = document.createElement("label");
-              const radioButton = document.createElement("input");
-              radioButton.type = "radio";
-              radioButton.name = "answer";
-              radioButton.value = option.value;
-              radioLabel.appendChild(radioButton);
-              radioLabel.appendChild(document.createTextNode(option.label));
-              radioContainer.appendChild(radioLabel);
-              radioContainer.appendChild(document.createElement("br"));
-          });
-      });
+        radioOptions.forEach(option => {
+            const radioLabel = document.createElement("label");
+            const radioButton = document.createElement("input");
+            radioButton.type = "radio";
+            radioButton.name = "answer";
+            radioButton.value = option.value;
+            radioLabel.appendChild(radioButton);
+            radioLabel.appendChild(document.createTextNode(option.label));
+            radioContainer.appendChild(radioLabel);
+            radioContainer.appendChild(document.createElement("br"));
+        });
+    });
 
 
-      function shuffleArray(array) {
-          for (let i = array.length - 1; i > 0; i--) {
-              const j = Math.floor(Math.random() * (i + 1));
-              [array[i], array[j]] = [array[j], array[i]];
-          }
-      }
-  </script>
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+</script>

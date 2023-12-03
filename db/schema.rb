@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_25_025211) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_30_165145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "quest_tags", force: :cascade do |t|
+    t.bigint "quest_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quest_id"], name: "index_quest_tags_on_quest_id"
+    t.index ["tag_id"], name: "index_quest_tags_on_tag_id"
+  end
 
   create_table "quests", force: :cascade do |t|
     t.string "question"
@@ -22,13 +31,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_025211) do
     t.integer "owner"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "similar_word"
     t.boolean "completed"
     t.bigint "quest_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["quest_id"], name: "index_tasks_on_quests_id"
+    t.index ["quest_id"], name: "index_tasks_on_quest_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,5 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_025211) do
     t.date "birth_date"
   end
 
+  add_foreign_key "quest_tags", "quests"
+  add_foreign_key "quest_tags", "tags"
   add_foreign_key "tasks", "quests"
 end
