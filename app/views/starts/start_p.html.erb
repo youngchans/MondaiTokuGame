@@ -1,18 +1,44 @@
 <div class="Main_T">ランダムクイズ</div>
 <hr>
 <div style="text-align: center;">
-  <%= button_to "辞める", mains_main_path, method: :get,class: "R_B"%>
-  <h2><%= session[:category]%>問題 <%= session[:answers] +1%> :    <%= @random_quest.question %></h2>
+  <%= button_to "辞める", mains_main_path, method: :get, class: "R_B"%>
+  <h2 id="question-header">問題 <%= session[:answers] + 1 %>: <%= @random_quest.question %></h2>
 
   <%= form_tag(submit_answer_start_path, method: :post) do %>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <div id="radio-container" style="border: 1px solid #000; padding: 15px; margin-left: 500px; margin-right: 500px;">
     </div>
     <%= submit_tag "提出" %>
-  <%end %>
+  <% end %>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        loadQuiz();
+    });
+
+    function loadQuiz() {
+        $.ajax({
+            url: '/starts/start_p',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                renderQuiz(data);
+            },
+            error: function() {
+                console.log('error');
+            }
+        });
+    }
+
+    function renderQuiz(data) {
+        $('#quiz-container').html(`
+      <h2>問題 ${data.answers + 1}: ${data.question}</h2>
+      <div id="radio-container" style="border: 1px solid #000; padding: 15px; margin-left: 500px; margin-right: 500px;"></div>
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <button type="submit">提出</button>
+    `);
+
         const radioContainer = document.getElementById("radio-container");
         const radioOptions = [
             { value: "description", label: "<%= @random_quest.description %>" },
@@ -20,9 +46,7 @@
             { value: "similar_word2", label: "<%= @random_similar.similar_word %>" }
         ];
 
-
         shuffleArray(radioOptions);
-
 
         radioOptions.forEach(option => {
             const radioLabel = document.createElement("label");
@@ -35,8 +59,7 @@
             radioContainer.appendChild(radioLabel);
             radioContainer.appendChild(document.createElement("br"));
         });
-    });
-
+    }
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {

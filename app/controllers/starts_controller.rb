@@ -8,6 +8,20 @@ class StartsController < ApplicationController
       redirect_to starts_error_path
     else
       generate_random_quest
+      respond_to do |format|
+        format.html
+        format.json do
+          render json: {
+            category: @category,
+            question: @random_quest.question,
+            options: [
+              { value: "description", label: @random_quest.description },
+              { value: "similar_word", label: @quest_similar.similar_word },
+              { value: "similar_word2", label: @random_similar.similar_word }
+            ]
+          }
+        end
+      end
     end
     end
 
@@ -21,7 +35,9 @@ class StartsController < ApplicationController
     if session[:answers] >= 10
       @correct_rate = (session[:correct].to_f / session[:answers] * 100).to_i
       user = User.find(cookies[:name])
+      if @correct_rate>user.highest_rate
       user.update(highest_rate: @correct_rate)
+      end
       flash[:success] = "お疲れ様でした！#{session[:answers]}中#{session[:correct]}正解で正解率は#{(session[:correct].to_f / session[:answers] * 100).to_i}％です！"
       redirect_to ranking_rank_p_path
     else
@@ -51,6 +67,17 @@ class StartsController < ApplicationController
 
   def increment_correct_answers
     session[:correct]+=1
+  end
+  def render_json_response
+    render json: {
+      category: @category,
+      question: @random_quest.question,
+      options: [
+        { value: "description", label: @random_quest.description },
+        { value: "similar_word", label: @quest_similar.similar_word },
+        { value: "similar_word2", label: @random_similar.similar_word }
+      ]
+    }
   end
 
 
