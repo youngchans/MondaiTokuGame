@@ -60,11 +60,6 @@ class QuestsController < ApplicationController
   end
 
   def update
-    if @quest.owner != cookies[:name]
-      @quest.errors.add(:base, "単語を修正する権限がありません。")
-      format.html { render :edit, status: :unprocessable_entity }
-      format.json { render json: @quest.errors, status: :unprocessable_entity }
-    else
     respond_to do |format|
       if @quest.update(quest_params)
         format.html { redirect_to quest_url(@quest), notice: "単語アップデートを成功しました。" }
@@ -86,8 +81,7 @@ class QuestsController < ApplicationController
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
-    end
-    end
+  end
 
   def destroy
     @quest.destroy

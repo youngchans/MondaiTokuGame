@@ -100,5 +100,7 @@ class StartsController < ApplicationController
     unique_available_ids = similar_id.to_a.difference([@random_id].flatten)
     @rand_similar_id = unique_available_ids.sample
     @random_similar = Task.find_by(quest_id: @rand_similar_id)
+
+    
   end
 end

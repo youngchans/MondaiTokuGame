@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_30_165145) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_23_021036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_165145) do
     t.date "birth_date"
   end
 
-  add_foreign_key "quest_tags", "quests"
+  add_foreign_key "quest_tags", "quests", on_delete: :cascade
   add_foreign_key "quest_tags", "tags"
   add_foreign_key "tasks", "quests"
 end
