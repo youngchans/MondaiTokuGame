@@ -8,7 +8,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "ユーザー作成を成功しました。"
-        redirect_to root_path
+      flash[:notice] = "ログイン成功しました。"
+      cookies[:name] = @user.id
+      redirect_to mains_main_path
     else
       flash[:fail] = "ユーザー作成を失敗しました。（既にユーザ名が存在しております。パスワードが違います。）"
       render :new
