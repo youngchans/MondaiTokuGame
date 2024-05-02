@@ -93,6 +93,7 @@ class StartsController < ApplicationController
       tagged_quest_ids = tagged_quest_tags.pluck(:quest_id)
       available_ids = Quest.where(id: tagged_quest_ids)
     end
+    
     @random_id = available_ids.sample
     @random_quest = Quest.find_by(id: @random_id)
     @quest_similar = Task.find_by(quest_id: @random_id)
