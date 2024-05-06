@@ -1,6 +1,5 @@
 class MainsController < ApplicationController
   def main
-    session[:used_id]= []
     session[:answers]= 0
     session[:correct]= 0
   end
