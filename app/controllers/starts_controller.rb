@@ -1,5 +1,6 @@
 class StartsController < ApplicationController
   def start_p
+    
     session[:current_category] = params[:category] if params[:category]
     @category = session[:current_category]
     task_pre = Task.all
@@ -7,6 +8,10 @@ class StartsController < ApplicationController
     if similar_empty.present? || Quest.count <= 10
       redirect_to starts_error_path
     else
+      unless session[:question_generated]
+        make_question
+        session[:question_generated] = true
+      end
       generate_random_quest
       respond_to do |format|
         format.html
@@ -16,8 +21,8 @@ class StartsController < ApplicationController
             question: @random_quest.question,
             options: [
               { value: "description", label: @random_quest.description },
-              { value: "similar_word", label: @quest_similar.similar_word },
-              { value: "similar_word2", label: @random_similar.similar_word }
+              { value: "wrong_description", label: @random_wrong.description},
+              { value: "wrong_description2", label: @random_wrong2.description }
             ]
           }
         end
@@ -33,6 +38,7 @@ class StartsController < ApplicationController
     increment_answers
 
     if session[:answers] >= 10
+      session[:question_generated] = false
       @correct_rate = (session[:correct].to_f / session[:answers] * 100).to_i
       user = User.find(cookies[:name])
       if @correct_rate>user.highest_rate
@@ -42,16 +48,34 @@ class StartsController < ApplicationController
       redirect_to ranking_rank_p_path
     else
       generate_random_quest
-      redirect_to :starts_start_p
+      redirect_to:starts_start_p
     end
   end
 
 
   private
 
-  def initialize_used_ids
-    session[:used_id]= []
+  def make_question
+  if @category == "生物"
+    category_tag = Tag.find_by(tag: "生物")
+  else
+    category_tag = Tag.find_by(tag: "無生物")
   end
+
+  tagged_quest_tags = QuestTag.where(tag_id: category_tag.id)
+  tagged_quest_ids = tagged_quest_tags.pluck(:quest_id)
+  
+  @questions = []
+  10.times do
+    question_id = tagged_quest_ids.sample
+    while @questions.include?(question_id)
+      question_id = tagged_quest_ids.sample
+    end
+    @questions << question_id
+  end
+  
+  session[:questions] = @questions
+end
 
   def initialize_answers
     session[:answers]= 0
@@ -74,33 +98,22 @@ class StartsController < ApplicationController
       question: @random_quest.question,
       options: [
         { value: "description", label: @random_quest.description },
-        { value: "similar_word", label: @quest_similar.similar_word },
-        { value: "similar_word2", label: @random_similar.similar_word }
+        { value: "wrong_description", label: @random_wrong.description },
+        { value: "wrong_description2", label: @random_wrong2.description }
       ]
     }
   end
 
 
   def generate_random_quest
-    if @category == "生物"
-      category_tag = Tag.find_by(tag: "生物")
-      tagged_quest_tags = QuestTag.where(tag_id: category_tag.id)
-      tagged_quest_ids = tagged_quest_tags.pluck(:quest_id)
-      available_ids = Quest.where(id: tagged_quest_ids)
-    else
-      category_tag = Tag.find_by(tag: "無生物")
-      tagged_quest_tags = QuestTag.where(tag_id: category_tag.id)
-      tagged_quest_ids = tagged_quest_tags.pluck(:quest_id)
-      available_ids = Quest.where(id: tagged_quest_ids)
-    end
-    @random_id = available_ids.sample
+    index = session[:answers] 
+    @random_id = session[:questions][index]
     @random_quest = Quest.find_by(id: @random_id)
-    @quest_similar = Task.find_by(quest_id: @random_id)
+    @quest_similar = Task.where(quest_id: @random_id)
     similar_id = Task.pluck(:quest_id)
     unique_available_ids = similar_id.to_a.difference([@random_id].flatten)
     @rand_similar_id = unique_available_ids.sample
-    @random_similar = Task.find_by(quest_id: @rand_similar_id)
-
-    
+    @random_wrong = Quest.where.not(id: @random_id).order("RANDOM()").first
+    @random_wrong2 = Quest.where.not(id: [@random_id, @random_wrong.id]).order("RANDOM()").first
   end
 end
