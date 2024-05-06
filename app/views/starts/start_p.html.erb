@@ -3,8 +3,11 @@
 <div style="text-align: center;">
   <%= button_to "辞める", mains_main_path, method: :get, class: "R_B"%>
   <h2 id="question-header">問題 <%= session[:answers] + 1 %>: <%= @random_quest.question %></h2>
-
-  <%= form_tag(submit_answer_start_path, method: :post) do %>
+  <h3>類似語</h3>
+  <% @quest_similar.each do |quest_similar| %>
+    <h2> ・<%= quest_similar.similar_word %> </h2>
+  <% end %> 
+<%= form_tag(submit_answer_start_path, method: :post) do %>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <div id="radio-container" style="border: 1px solid #000; padding: 15px; margin-left: 500px; margin-right: 500px;">
     </div>
@@ -42,8 +45,8 @@
         const radioContainer = document.getElementById("radio-container");
         const radioOptions = [
             { value: "description", label: "<%= @random_quest.description %>" },
-            { value: "similar_word", label: "<%= @quest_similar.similar_word %>" },
-            { value: "similar_word2", label: "<%= @random_similar.similar_word %>" }
+            { value: "wrong_description", label: "<%= @random_wrong.description %>" },
+            { value: "wrong_description2", label: "<%= @random_wrong2.description %>"}
         ];
 
         shuffleArray(radioOptions);
